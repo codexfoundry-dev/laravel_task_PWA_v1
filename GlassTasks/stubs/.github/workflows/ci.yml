@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - run: composer install --prefer-dist --no-progress --no-suggest
+        working-directory: ./GlassTasksApp
+      - run: cp .env.example .env && php artisan key:generate
+        working-directory: ./GlassTasksApp
+      - run: php artisan test
+        working-directory: ./GlassTasksApp
+
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+        working-directory: ./GlassTasksApp
+      - run: npm run build --if-present
+        working-directory: ./GlassTasksApp
