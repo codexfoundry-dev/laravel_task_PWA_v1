@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.glass-card { @apply bg-white/10 border border-white/20 rounded-2xl backdrop-blur-xl shadow-2xl; }
+.glass-subcard { @apply bg-white/10 border border-white/20 rounded-xl backdrop-blur-xl; }
+.glass-chip { @apply bg-white/10 border border-white/20 rounded-lg; }
+
+:root { color-scheme: dark; }
